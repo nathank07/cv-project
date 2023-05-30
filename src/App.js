@@ -1,46 +1,64 @@
-
 import React, { Component } from 'react'
-import { createRoot } from 'react-dom';
 import Info from './components/Info';
 import uniqid from "uniqid";
 import './App.css'
+import root from './index';
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
       info: {
-        text: '',
-        id: uniqid()
+        firstname: { text: '',
+          id: uniqid()
+        },
+        lastname: { text: '',
+          id: uniqid()
+        },
+        email: { text: '',
+          id: uniqid()
+        },
+        schooltitle: { text: '',
+          id: uniqid()
+        },
+        major: { text: '',
+          id: uniqid()
+        },
+        dateofstudy: { text: '',
+          id: uniqid()
+        },
       }
     }
   }
   render() {
-    const info = this.state;
+    const info = this.state.info;
     return (
       <div>
         <header>CV App</header>
-        <form onSubmit={() => this.submit(info)}>
+        <form onSubmit={this.submit}>
         <h1>First, let's get some information about yourself.</h1>
           <label>
             First Name: 
             <input type="text" 
               onChange={this.handleChange}
-              value={info.firstname}
+              value={info.firstname.text}
+              id="firstname"
             />
           </label>
           <label>
             Last Name:
             <input type="text" 
               onChange={this.handleChange}
-              value={info.lastname}
+              value={info.lastname.text}
+              id="lastname"
             />
           </label>
           <label>
-            Phone Number:
+            Email:
             <input type="text" 
               onChange={this.handleChange}
-              value={info.email}
+              value={info.email.text}
+              id="email"
             />
           </label>
           
@@ -49,21 +67,24 @@ class App extends Component {
             School Name:
             <input type="text" 
               onChange={this.handleChange}
-              value={info.schooltitle}
+              value={info.schooltitle.text}
+              id="schooltitle"
             />
           </label>
           <label>
             Major:
             <input type="text" 
               onChange={this.handleChange}
-              value={info.major}
+              value={info.major.text}
+              id="major"
             />
           </label>
           <label>
             Date of Graduation (or current span):
             <input type="text" 
               onChange={this.handleChange}
-              value={info.dateofstudy}
+              value={info.dateofstudy.text}
+              id="dateofstudy"
             />
           </label>
           <button type="submit">
@@ -74,16 +95,20 @@ class App extends Component {
     )
   }
   handleChange = (e) => {
+    console.log(e)
     this.setState({
       info: {
-        text: e.target.value,
-      }
-    });
+        firstname: { text: document.getElementById("firstname").value },
+        lastname: { text: document.getElementById("lastname").value },
+        email: { text: document.getElementById("email").value },
+        schooltitle: { text: document.getElementById("schooltitle").value },
+        major: { text: document.getElementById("major").value },
+        dateofstudy: { text: document.getElementById("dateofstudy").value },
+    }});
   }
-  submit = (info) => {
-    const domNode = document.getElementById('root');
-    const root = createRoot(domNode);
-    root.render(<Info info={info}/>)
+  submit = (e) => {
+    e.preventDefault();
+    root.render(<Info info={this.state}/>)
   }
 }
 
