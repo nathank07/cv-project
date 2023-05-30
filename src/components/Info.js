@@ -9,7 +9,10 @@ function Info(props) {
             <div>School: {info.schooltitle.text}</div>
             <div>Major: {info.major.text}</div>
             <div>Date of Study: {info.dateofstudy.text}</div>
-            <h3>Work Experience:</h3>
+            {info.work.filter(job => job.jobtitle.text && job.dateofwork.text).length > 0 ? <h3>Work Experience:</h3> : null}
+            {info.work.filter(job => job.jobtitle.text && job.dateofwork.text).map((job) => {
+                return <div>Worked at <b>{job.jobtitle.text}</b> during <b>{job.dateofwork.text}</b></div>
+            })}
         </div>
     );
 }

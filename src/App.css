@@ -44,3 +44,14 @@ button{
 button:hover{
     background-color: rgb(27, 27, 27);
 }
+
+.plus{
+    font-size: large;
+    font-weight: 900;
+    aspect-ratio: 1/1;
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
